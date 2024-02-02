@@ -5,7 +5,7 @@ import java.util.Stack;
 
 public class lc_739 {
 
-    public static int[] dailyTemperatures(int[] temperatures) {
+    public static int[] dailyTemperatures1(int[] temperatures) {
         int len = temperatures.length;
         if (len == 0) {
             return new int[]{};
@@ -23,6 +23,30 @@ public class lc_739 {
         return ans;
     }
 
+
+    public static int[] dailyTemperatures(int[] temperatures) {
+        int len = temperatures.length;
+        int[] ans = new int[len];
+
+        Stack<Integer> st = new Stack<Integer>();
+        ans[len - 1] = 0;
+        st.push(len - 1);
+        for (int i = len - 2; i >= 0; i--) {
+            while (!st.isEmpty() && temperatures[st.peek()] < temperatures[i]) {
+                st.pop();
+            }
+
+            if (st.isEmpty()) {
+                ans[i] = 0;
+            } else {
+                ans[i] = st.peek() - i;
+            }
+
+            st.push(i);
+        }
+        return ans;
+
+    }
 
     public static void main(String[] args) {
         int[] temperature = new int[]{73, 74, 75, 71, 69, 72, 76, 73};
