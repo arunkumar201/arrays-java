@@ -4,7 +4,7 @@ import java.util.HashMap;
 
 public class lc_791 {
 
-    public String customSortString(String order, String s) {
+    public String customSortString_1(String order, String s) {
         String res = "";
         HashMap<Character, Integer> map = new HashMap<Character, Integer>();
         for (char c : s.toCharArray()) {
@@ -32,6 +32,27 @@ public class lc_791 {
 
     }
 
+
+    public  String customSortString(String order, String s) {
+        int [] cnt = new int[26];
+        for (char c : s.toCharArray()) {
+            cnt[c - 'a']++;
+        }
+        StringBuilder sb = new StringBuilder();
+        for (char c : order.toCharArray()) {
+            while (cnt[c - 'a'] > 0) {
+                sb.append(c);
+                cnt[c - 'a']--;
+            }
+        }
+        for (int i = 0; i < 26; i++) {
+            while (cnt[i] > 0) {
+                sb.append((char)('a' + i));
+                cnt[i]--;
+            }
+        }
+        return sb.toString();
+    }
     public static void main(String[] args) {
         String order = "bcafg";
         String s = "abcd";
