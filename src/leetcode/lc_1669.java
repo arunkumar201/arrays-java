@@ -46,7 +46,8 @@ public class lc_1669 {
         list2.next.next = new ListNode(12);
 
         lc_1669 solution = new lc_1669();
-        ListNode mergedList = solution.mergeInBetween(list1, 2, 3, list2);
+        ListNode mergedList = solution.mergeInBetween(list1,
+                2, 3, list2);
 
         // Print the merged list
         ListNode current = mergedList;
