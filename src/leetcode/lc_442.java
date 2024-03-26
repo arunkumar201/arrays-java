@@ -25,7 +25,7 @@ public class lc_442 {
         for (int i = 0; i < nums.length; i++) {
             //get the index , the element correspond to it
             int index = Math.abs(nums[i]) - 1;
-            //if the element is negative, it is duplicate or we have seen it before
+            //if the element is negative, it is duplicate, or we have seen it before
             //we will add it to our resulting  list
             if (nums[index] < 0) {
                 res.add(index + 1);
