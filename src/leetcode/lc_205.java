@@ -1,33 +1,34 @@
 package leetcode;
 
+import java.util.Arrays;
 import java.util.HashMap;
 
 public class lc_205 {
 
-    public boolean isIsomorphic_map(String s, String t) {
+    public boolean isIsomorphic_Map(String s, String t) {
         int n1 = s.length();
         int n2 = t.length();
         if (n1 != n2) {
             return false;
         }
-        HashMap<Character, Character> mapST = new HashMap<>();
-        HashMap<Character, Character> mapTS = new HashMap<>();
+        HashMap<Character, Character> mst = new HashMap<>();
+        HashMap<Character, Character> mts = new HashMap<>();
+
         for (int i = 0; i < n1; i++) {
             char c1 = s.charAt(i);
             char c2 = t.charAt(i);
-            if (mapTS.containsKey(c1) && mapTS.get(c1) != c2) {
+            if (mst.containsKey(c1) && mst.get(c1) != c2) {
                 return false;
             }
-            if (mapST.containsKey(c2) && mapST.get(c2) != c1) {
+            if (mts.containsKey(c2) && mts.get(c2) != c1) {
                 return false;
             }
-
-            mapTS.put(c1, c2);
-            mapST.put(c2, c1);
-
+            mst.put(c1, c2);
+            mts.put(c2, c1);
         }
         return true;
     }
+
 
     public boolean isIsomorphic(String s, String t) {
         int n1 = s.length();
@@ -35,17 +36,18 @@ public class lc_205 {
         if (n1 != n2) {
             return false;
         }
-        int[] map1 = new int[256];
-        int[] map2 = new int[256];
+        int[] mst = new int[256];
+        int[] mts = new int[256];
+
         for (int i = 0; i < n1; i++) {
-            int ascii1 = s.charAt(i) ;
-            int ascii2 = t.charAt(i) ;
-            if (map1[ascii1] != map2[ascii2]) {
+            int c1 = s.charAt(i) - 'a';
+            int c2 = t.charAt(i) - 'a';
+            if(mst[c1]!=mts[c2]){
                 return false;
             }
-            map1[ascii1] = i + 1;
-            map2[ascii2] = i + 1;
-
+            System.out.println(c1+"----"+c2);
+            mst[c1]=i+1;
+            mts[c2]=i+1;
         }
         return true;
     }
