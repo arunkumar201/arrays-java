@@ -8,6 +8,7 @@ public class lc_402 {
         // base case
         if (k == num.length())
             return "0";
+
         Stack<Character> stack = new Stack<>();
         for (int i = 0; i < num.length(); i++) {
             char c = num.charAt(i);
@@ -17,24 +18,24 @@ public class lc_402 {
             }
             stack.push(c);
         }
-        System.out.println(stack);
         while (k > 0 && !stack.isEmpty()) {
             stack.pop();
             k--;
         }
-        StringBuilder res = new StringBuilder();
+        String res = "";
         while (!stack.isEmpty()) {
-            res.append(stack.pop());
+            res = stack.pop() + res;
         }
-        while (res.length() > 1 && res.charAt(res.length() - 1) == '0') {
-            res.deleteCharAt(res.length() - 1);
+        int index = 0;
+        while (index < res.length() && res.charAt(index) == '0') {
+            index++;
         }
-        return res.reverse().toString();
+        return res.substring(index);
     }
 
     public static void main(String[] args) {
         // num = "1432219", k = 3
-        String num = "112";
+        String num = "10200";
         int k = 1;
         int res = Integer.parseInt(new lc_402().removeKdigits(num, k));
         System.out.println(res);
