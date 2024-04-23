@@ -44,7 +44,7 @@ public class lc_1887 {
         return res;
     }
 
-    public static voi¡d main(String[] args) {
+    public static void main(String[] args) {
 //   nums = [5,1,3]
         int[] nums = new int[]{5, 1, 3};
 //        int res = new lc_1887().reductionOperations(nums);
