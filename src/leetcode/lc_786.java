@@ -27,7 +27,7 @@ public class lc_786 {
         while (k > 0) {
             double[] currVal = pq.poll();
             int numeratorIndex = (int) currVal[1];
-            int denominatorIndex = (int) currVal[2]-1;
+            int denominatorIndex = (int) currVal[2] - 1;
             if (numeratorIndex < denominatorIndex) {
                 double primeFraction = (double) arr[numeratorIndex] / arr[denominatorIndex];
                 pq.offer(new double[]{primeFraction, numeratorIndex, denominatorIndex});
@@ -35,19 +35,47 @@ public class lc_786 {
             k--;
             if (k == 0) {
                 res[0] = arr[numeratorIndex];
-                res[1] = arr[denominatorIndex+1];
+                res[1] = arr[denominatorIndex + 1];
                 break;
             }
         }
-    return res;
+        return res;
     }
+
+    public int[] kthSmallestPrimeFraction_bruteForce(int[] arr, int k) {
+        int[] res = new int[2];
+        int n = arr.length;
+        PriorityQueue<double[]> pq = new PriorityQueue<>((a, b) -> Double.compare(a[0], b[0]));
+
+        for (int i = 0; i < n; i++) {
+            for (int j = i + 1; j < n; j++) {
+                double fractionRation = (double) arr[i] / arr[j];
+                pq.offer(new double[]{fractionRation, i, j});
+            }
+        }
+
+        while (k > 0) {
+            double[] currVal = pq.poll();
+            int numeratorIndex = (int) currVal[1];
+            int denominatorIndex = (int) currVal[2];
+            k--;
+            if (k == 0) {
+                res[0] = arr[numeratorIndex];
+                res[1] = arr[denominatorIndex];
+                break;
+            }
+
+        }
+        return res;
+    }
+
 
     public static void main(String[] args) {
 //        Input: arr = [1,2,3,5], k = 3
 
-        int[] arr = new int[]{1,2,3,5};
+        int[] arr = new int[]{1, 2, 3, 5};
         int k = 3;
-        int[] res = new lc_786().kthSmallestPrimeFraction(arr, k);
+        int[] res = new lc_786().kthSmallestPrimeFraction_bruteForce(arr, k);
         System.out.println(Arrays.toString(res));
     }
 }
