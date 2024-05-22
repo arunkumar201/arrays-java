@@ -56,42 +56,72 @@ public class lc_238 {
         }
         return result;
     }
+
     //Without using divisor method
-    public int[] productExceptSelf(int[] nums) {
-        int n=nums.length;
-        int[] result=new int[n];
-        int[] postfix_product=new int[n];
-        int[] prefix_product=new int[n];
-      for(int i=n-1;i>=0;i--){
-         if(i==n-1){
-             postfix_product[i]= nums[i];
-         }else{
-         postfix_product[i]=postfix_product[i+1]*nums[i];
-         }
-     }
+    public int[] productExceptSelf1(int[] nums) {
+        int n = nums.length;
+        int[] result = new int[n];
+        int[] postfix_product = new int[n];
+        int[] prefix_product = new int[n];
+        for (int i = n - 1; i >= 0; i--) {
+            if (i == n - 1) {
+                postfix_product[i] = nums[i];
+            } else {
+                postfix_product[i] = postfix_product[i + 1] * nums[i];
+            }
+        }
 
-      for(int j=0;j<n;j++){
-          if(j==0){
-              prefix_product[j]=nums[j];
-          }else {
-              prefix_product[j]=prefix_product[j-1]*nums[j];
-          }
-      }
+        for (int j = 0; j < n; j++) {
+            if (j == 0) {
+                prefix_product[j] = nums[j];
+            } else {
+                prefix_product[j] = prefix_product[j - 1] * nums[j];
+            }
+        }
 
-      for(int k=0;k<n;k++){
-          if(k==0){
-              result[k]=postfix_product[k+1];
-          }else if(k==n-1){
-              result[k]=prefix_product[k-1];
-          }else{
-              result[k]=prefix_product[k-1]*postfix_product[k+1];
-          }
-      }
-     return  result;
+        for (int k = 0; k < n; k++) {
+            if (k == 0) {
+                result[k] = postfix_product[k + 1];
+            } else if (k == n - 1) {
+                result[k] = prefix_product[k - 1];
+            } else {
+                result[k] = prefix_product[k - 1] * postfix_product[k + 1];
+            }
+        }
+        return result;
     }
 
+    public int[] productExceptSelf(int[] nums) {
+        int len = nums.length;
+        int total_product_without_zero = 1;
+        int zeros_count = 0;
+        int[] result = new int[len];
+
+        for (int num : nums) {
+            if (num != 0) {
+                total_product_without_zero *= num;
+            } else {
+                zeros_count++;
+            }
+        }
+
+        for (int i = 0; i < len; i++) {
+            if (nums[i] == 0) {
+                result[i] = zeros_count > 1 ? 0 : total_product_without_zero;
+            } else {
+                if (zeros_count > 0) {
+                    result[i] = 0;
+                } else {
+                    result[i] = total_product_without_zero / nums[i];
+                }
+            }
+        }
+        return result;
+    }
+
+
     public static void main(String[] args) {
-        int[] nums = new int[]{1,2,3,4};
+        int[] nums = new int[]{0, 0};
 
         int[] res = new lc_238().productExceptSelf(nums);
         System.out.println(Arrays.toString(res));
