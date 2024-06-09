@@ -38,6 +38,24 @@ public class lc_523 {
         return false;
     }
 
+//    Fibonnaaci series
+//    0 1 1 2 3 5 8 13 21 34 55 89 144 233 377
+//    0 1 2 3 4 5 6 7  8  9 10 11  12  13  14
+//    0 1 2 3 4 0 1 1  2  3  4  0   1   1   2
+
+    public boolean isFibonacci(int n) {
+        int a = 0, b = 1;
+        while (a <= n) {
+            if (a == n) {
+                return true;
+            }
+            int c = a + b;
+            a = b;
+            b = c;
+        }
+        return false;
+    }
+
     public static void main(String[] args) {
         int[] nums = new int[]{23, 2, 4, 6, 6};
         int k = 7;

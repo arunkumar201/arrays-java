@@ -31,13 +31,13 @@ public class lc_560 {
         for (int i = 1; i < len; i++) {
             prefix[i] = prefix[i - 1] + nums[i];
         }
-        System.out.println(Arrays.toString(prefix));
         for (int x : prefix) {
             if (map.containsKey(x - k)) {
                 count = count + map.get(x - k);
             }
             map.put(x, map.getOrDefault(x, 0) + 1);
         }
+
         if(map.containsKey(k)) {
             count = count + map.get(k);
         }
