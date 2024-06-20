@@ -5,7 +5,6 @@ public class lc_633 {
         if (c == 0) {
             return true;
         }
-
         for (int a = 0; a < Math.sqrt(c) + 1; a++) {
             double a_squared = a * a;
             double b_squared = c - a_squared;
@@ -20,6 +19,7 @@ public class lc_633 {
         return false;
     }
 
+    //time complexity O(sqrt(c))
     public boolean judgeSquareSum2(int c) {
         int left = 0;
         int right = (int) Math.sqrt(c);
