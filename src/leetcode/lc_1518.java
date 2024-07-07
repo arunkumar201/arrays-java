@@ -2,15 +2,16 @@ package leetcode;
 
 public class lc_1518 {
     public int numWaterBottles(int numBottles, int numExchange) {
-        int totalBottleCount = numBottles;
-        int emptyBottleCount = numBottles;
-        while (emptyBottleCount >= numExchange) {
-            int exchangedFullBottleCount = emptyBottleCount / numExchange;
-            totalBottleCount += exchangedFullBottleCount;
-            int remEmptyBottleCount = emptyBottleCount - (exchangedFullBottleCount * numExchange);
-            emptyBottleCount = exchangedFullBottleCount + remEmptyBottleCount;
+        int maxBottlesToDrinkWater = numBottles;
+        int emptyBottles = numBottles;
+
+        while (emptyBottles >= numExchange) {
+            int newBottles = emptyBottles / numExchange;
+            maxBottlesToDrinkWater += newBottles;
+            int remainingEmptyBottles = emptyBottles % numExchange;
+            emptyBottles = remainingEmptyBottles + newBottles;
         }
-        return totalBottleCount;
+        return maxBottlesToDrinkWater;
     }
 
     public static void main(String[] args) {
