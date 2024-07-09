@@ -16,7 +16,9 @@ public class lc_1701 {
                 curTime = arrivalTime;
             }
             curTime += serviceTime;
+            System.out.println("curTime: " + curTime + " arrivalTime: " + arrivalTime + " serviceTime: " + serviceTime);
             avgWaitingTime += curTime - arrivalTime;
+            System.out.println("avgWaitingTime: " + avgWaitingTime);
 
         }
         return avgWaitingTime / len;
@@ -24,12 +26,12 @@ public class lc_1701 {
 
     public static void main(String[] args) {
         //Input: customers = [[1,2],[2,5],[4,3]]
-        int[][] customers = new int[][]{{1, 2}, {2, 5}, {4, 3}};
-        double res = new lc_1701().averageWaitingTime(customers);
-        System.out.println(res);
+//        int[][] customers = new int[][]{{1, 2}, {2, 5}, {4, 3}};
+//        double res = new lc_1701().averageWaitingTime(customers);
+//        System.out.println(res);
         //Input: customers = [[5,2],[5,4],[10,3],[20,1]]
-        customers = new int[][]{{5, 2}, {5, 4}, {10, 3}, {20, 1}};
-        res = new lc_1701().averageWaitingTime(customers);
+        int[][] customers = new int[][]{{5, 2}, {5, 4}, {10, 3}, {20, 1}};
+        double res = new lc_1701().averageWaitingTime(customers);
         System.out.println(res);
     }
 }
