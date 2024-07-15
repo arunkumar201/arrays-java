@@ -26,26 +26,21 @@ public class lc_1717 {
     //Brute Force.
     public int maximumGain(String s, int x, int y) {
         int res = 0;
-        int res1 = 0;
+        //find maximum score pair
+        String maxPair = x > y ? "ab" : "ba";
+
         Stack<Character> stack1 = new Stack<>();
-        Stack<Character> stack2 = new Stack<>();
         for (char c : s.toCharArray()) {
             stack1.push(c);
-            stack2.push(c);
         }
         // Try to remove ab first in stack1
-        res += removePairs(stack1, 'a', 'b', x);
+        res += removePairs(stack1, maxPair.charAt(0), maxPair.charAt(1), Math.max(x, y));
 
         // Now delete remaining  ba from stack1
-        res += removePairs(stack1, 'b', 'a', y);
-
-        // Try to remove ba first in stack2
-        res1 += removePairs(stack2, 'b', 'a', y);
-        // Now delete remaining ab from stack2
-        res1 += removePairs(stack2, 'a', 'b', x);
+        res += removePairs(stack1, maxPair.charAt(1), maxPair.charAt(0), Math.min(x, y));
 
         // Return the maximum score
-        return Math.max(res, res1);
+        return res;
     }
 
 
