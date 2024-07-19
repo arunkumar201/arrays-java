@@ -3,7 +3,7 @@ package leetcode;
 public class lc_231 {
 
     public static boolean isPowerOfTwo(int n) {
-         if (n <= 0)
+        if (n <= 0)
             return false;
 //        double ans = (Math.log(n) / Math.log(2));
 //        return Math.abs(ans - Math.round(ans)) < 1e-10;
@@ -26,9 +26,27 @@ public class lc_231 {
         return Math.abs(ans - Math.round(ans)) < 1e-10;
     }
 
+    //Brute force
+    public static boolean isPowerOfFour_BruteForce(int n) {
+        if (n <= 0)
+            return false;
+        if (n == 1)
+            return true;
+
+        int i = n;
+        while (i != 1) {
+            if (i % 2 != 0) {
+                return false;
+            }
+            i /= 2;
+        }
+        return true;
+    }
+
+
     public static void main(String[] args) {
         int n = 3;
-        boolean ans = isPowerOfTwo(n);
+        boolean ans = isPowerOfFour_BruteForce(n);
         System.out.println(ans);
     }
 }
