@@ -57,9 +57,5 @@ public class lc_2418 {
 		String[] res_map = new lc_2418().sortPeople_using_map(names, heights);
 		for (String s : res_map)
 			System.out.println(s);
-		System.out.println("--------");
-		String[] res_pq = new lc_2418().sortPeople_priority_queue(names, heights);
-		for (String s : res_pq)
-			System.out.println(s);
 	}
 }
