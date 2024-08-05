@@ -5,7 +5,7 @@ import java.util.Arrays;
 public class lc_1508 {
 	
 	public int rangeSum(int[] nums, int n, int left, int right) {
-		int[] subArraySum = new int[n * (n + 1) / 2];
+		double[] subArraySum = new double[n * (n + 1) / 2];
 		double sum = 0;
 		int k = 0;
 		double x = Math.pow(10, 9) + 7;
