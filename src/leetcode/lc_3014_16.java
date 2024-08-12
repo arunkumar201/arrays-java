@@ -42,7 +42,7 @@ public class lc_3014_16 {
 		int[] map = new int[26];
 		int result = 0;
 		
-		for (int i = 0; i < word.length(); i++) {
+	for (int i = 0; i < word.length(); i++) {
 			map[word.charAt(i) - 'a']++;
 		}
 		
