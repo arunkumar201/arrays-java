@@ -2,7 +2,6 @@ package leetcode;
 
 public class lc_2807 {
 	public int getGreatestCommonDivisor(int a, int b) {
-		// Loop until b becomes 0
 		while (b != 0) {
 			int temp = b;
 			b = a % b;
@@ -10,6 +9,7 @@ public class lc_2807 {
 		}
 		return a;
 	}
+	
 	
 	public ListNode insertGreatestCommonDivisors(ListNode head) {
 		//handle some base conditions
