@@ -18,10 +18,12 @@ public class lc_402 {
             }
             stack.push(c);
         }
+        //if we had a number like 12345678 ,in that case we should delete top remaining k elements .
         while (k > 0 && !stack.isEmpty()) {
             stack.pop();
             k--;
         }
+        
         String res = "";
         while (!stack.isEmpty()) {
             res = stack.pop() + res;
