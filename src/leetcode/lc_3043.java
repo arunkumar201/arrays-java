@@ -1,5 +1,7 @@
 package leetcode;
 
+import java.util.HashSet;
+
 public class lc_3043 {
 	public int longestCommonPrefix(int[] arr1, int[] arr2) {
         HashSet<Integer> set = new HashSet<>();
