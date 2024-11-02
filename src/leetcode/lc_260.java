@@ -1,6 +1,6 @@
 package leetcode;
 
-import java.util.HashMap;
+import java.util.HashSet;
 
 public class lc_260 {
 	public static int[] singleNumber(int[] nums) {
@@ -22,17 +22,18 @@ public class lc_260 {
 	}
 	
 	public static int[] singleNumber2(int[] nums) {
-		HashMap<Integer, Integer> mp = new HashMap<>();
+		HashSet<Integer> set = new HashSet<>();
 		int[] result = new int[2];
 		for (int num : nums) {
-			mp.put(num, mp.getOrDefault(num, 0) + 1);
-		}
-		System.out.println(mp);
-		int i = 0;
-		for (int num : nums) {
-			if (mp.get(num) == 1) {
-				result[i++] = num;
+			if (!set.contains(num)) {
+				set.add(num);
+			} else {
+				set.remove(num);
 			}
+		}
+		int i = 0;
+		for (int num : set) {
+			result[i++] = num;
 		}
 		return result;
 	}
