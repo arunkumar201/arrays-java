@@ -11,7 +11,7 @@ public class lc_916 {
 		String[] words1 = {"amazon", "apple", "facebook", "google", "leetcode"};
 		String[] words2 = {"l", "e"};
 		
-		List<String> res = new lc_916().wordSubsets_Hashmap(words1, words2);
+		List<String> res = new lc_916().wordSubsets_optimized(words1, words2);
 		System.out.println(res);
 		
 	}
