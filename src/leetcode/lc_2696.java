@@ -5,10 +5,10 @@ import java.util.Stack;
 public class lc_2696 {
 	public static void main(String[] args) {
 		String s = "ABFCACDB";
-		int res = new lc_2696_P().minLength(s);
+		int res = new lc_2696().minLength(s);
 		System.out.println(res);  // Output: 2
 		
-		int res1 = new lc_2696_P().minLengthStack(s);
+		int res1 = new lc_2696().minLengthStack(s);
 		System.out.println(res1);  // Output: 2
 	}
 	
