@@ -11,6 +11,8 @@ public class lc_2780 {
 		//Input: nums = [1,2,2,2]
 		List<Integer> nums = Arrays.asList(1, 2, 2, 2);
 		System.out.println(new lc_2780().minimumIndex(nums)); // Output: 2
+		System.out.println("-------Optimized-------");
+		System.out.println(new lc_2780().minimumIndex_optimized(nums)); // Output: 2
 	}
 	
 	public int minimumIndex(List<Integer> nums) {
@@ -41,6 +43,44 @@ public class lc_2780 {
 				return i;
 			}
 			
+		}
+		// if no split is valid, return -1
+		return -1;
+	}
+	
+	public int minimumIndex_optimized(List<Integer> nums) {
+		int n = nums.size();
+		int dominantItem = -1;
+		int count = 0;
+		//check which item is dominant in the array
+		for (int i = 0; i < n; i++) {
+			if (count == 0) {
+				dominantItem = nums.get(i);
+				count++;
+			} else if (nums.get(i) == dominantItem) {
+				count++;
+			} else {
+				count--;
+			}
+		}
+		//get dominant item count in entire array
+		int dominantItemCount = count;
+		for (int i = 0; i < n; i++) {
+			if (nums.get(i) == dominantItem) {
+				dominantItemCount++;
+			}
+		}
+		
+		//check if the split is valid
+		int c = 0;
+		for (int i = 0; i < n; i++) {
+			int current = nums.get(i);
+			if (current == dominantItem) {
+				c++;
+			}
+			if (c * 2 > i + 1 && (dominantItemCount - c) * 2 > n - i - 1) {
+				return i;
+			}
 		}
 		// if no split is valid, return -1
 		return -1;
