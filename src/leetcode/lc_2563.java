@@ -1,5 +1,7 @@
 package leetcode;
 
+import java.util.Arrays;
+
 public class lc_2563 {
 	
 	
@@ -10,6 +12,8 @@ public class lc_2563 {
 		int lower = 11;
 		int upper = 11;
 		System.out.println(new lc_2563().countFairPairs_bruteForce(nums, lower, upper));
+		System.out.println("--------------");
+		System.out.println(new lc_2563().countFairPairs(nums, lower, upper));
 	}
 	
 	public long countFairPairs_bruteForce(int[] nums, int lower, int upper) {
@@ -27,4 +31,33 @@ public class lc_2563 {
 		
 		return count;
 	}
+	
+	public long countFairPairs(int[] nums, int lower, int upper) {
+		long count = 0;
+		int n = nums.length;
+		Arrays.sort(nums);
+		
+		for (int i = 0; i < n; i++) {
+			long high = binarySearch(nums, i + 1, n - 1, upper - nums[i] + 1);
+			long low = binarySearch(nums, i + 1, n - 1, lower - nums[i]);
+			count += (high - low);
+			
+		}
+		return count;
+	}
+	
+	public int binarySearch(int[] nums, int start, int end, int target) {
+		while (start <= end) {
+			int mid = start + ((end - start) / 2);
+			
+			if (nums[mid] >= target) {
+				end = mid - 1;
+			} else {
+				start = mid + 1;
+			}
+		}
+		return start;
+	}
+	
 }
+
