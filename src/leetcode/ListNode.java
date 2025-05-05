@@ -7,7 +7,7 @@ public class ListNode {
     public ListNode(int val) {
         this.val = val;
     }
-    public static void  DisplayList(ListNode head) {
+    public static boolean DisplayList(ListNode head) {
         StringBuilder sb = new StringBuilder();
         while (head != null) {
             sb.append(head.val).append(" -> ");
@@ -15,5 +15,6 @@ public class ListNode {
         }
         sb.append("null");
         System.out.println(sb.toString());
+        return sb.toString().equals("Empty");
     }
 }
