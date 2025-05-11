@@ -20,7 +20,7 @@ public class lc_231 {
 		double ans = Math.log(n) / Math.log(2);
         System.out.println(ans);
         double x=1e-10;
-        return Math.abs(ans - Math.round(ans)) < x;
+		return Math.abs(Math.round(ans)-ans)<=1e-10;
 	}
 	
 	public static boolean isPowerOfThree(int n) {
