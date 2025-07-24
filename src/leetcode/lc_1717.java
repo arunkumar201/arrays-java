@@ -28,7 +28,7 @@ public class lc_1717 {
         StringBuilder sb = new StringBuilder(inputString);
         int n = inputString.length();
         int j = 0;
-
+        
         for (int i = 0; i < n; i++) {
             sb.setCharAt(j++, sb.charAt(i));
 
