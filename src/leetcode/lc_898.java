@@ -14,6 +14,9 @@ public class lc_898 {
 		int result_optimized = new lc_898().subarrayBitwiseORs_optimized(arr);
 		System.out.println("Optimized : " + result_optimized);
 		
+		int result = new lc_898().subarrayBitwiseORs(arr);
+		System.out.println("easy Optimized : " + result);
+		
 		
 	}
 	
@@ -53,6 +56,30 @@ public class lc_898 {
 		}
 		return result.size();
 		
+	}
+	
+	public int subarrayBitwiseORs(int[] nums) {
+		HashSet<Integer> prev = new HashSet<>();
+		HashSet<Integer> result = new HashSet<>();
+		HashSet<Integer> curr = new HashSet<>();
+		int n = nums.length;
+		
+		for (int num : nums) {
+			//this loop can run max of 32 times , as when we do OR it will always increase the prev value or
+			//add more 1's or remain same - as we display the num in 32 bit
+			for (int x : prev) {
+				int curr_or = x | num;
+				curr.add(curr_or);
+				result.add(curr_or);
+			}
+			//we need to add the curr item into the set as it makes a sub-arr iteself
+			curr.add(num);
+			result.add(num);
+			
+			prev=curr;
+			curr = new HashSet<>();
+		}
+		return result.size();
 	}
 }
 	
