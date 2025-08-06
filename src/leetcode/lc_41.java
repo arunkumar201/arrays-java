@@ -5,75 +5,100 @@ import java.util.HashSet;
 import java.util.Set;
 
 public class lc_41 {
-    public int firstMissingPositive_sort(int[] nums) {
-        Arrays.sort(nums);
-        int res = 1;
-        for (int num : nums) {
-            if (num == res) {
-                res++;
-            } else if (num > 0) {
-                break;
-            }
-        }
-        return res;
-    }
-
-    public int firstMissingPositive_set(int[] nums) {
-        //Time Complexity: O(N)
-        //Space Complexity: O(N)
-        //We know the the smallest positive integer  value ranges
-        // from the 1 to len+1 always,
-        //so we can convert the array to hashset and iterate the loop
-        // from 1 to len+1 and return the first missing number
-        int len = nums.length;
-        int res = 1;
-        Set<Integer> set = new HashSet<>();
-        for (int num : nums) {
-            set.add(num);
-        }
-        for (int i = 1; i <= len + 1; i++) {
-            if (!set.contains(i)) {
-                return i;
-            }
-        }
-        return res;
-    }
-
-    public int firstMissingPositive(int[] nums) {
-        int len = nums.length;
-        //Iterate the nums and replace all negative to zero as -ve never be in the
-        // solution set [1,...,len+1] and as we are replacing to zero that also not part of the
-        //solution set
-        for (int i = 0; i < len; i++) {
-            if (nums[i] < 0) {
-                nums[i] = 0;
-            }
-        }
-        for(int i=0;i<len;i++){
-            int val = Math.abs(nums[i]) ;
-            if(val>=1 && val<=len){
-              if(nums[val-1]>0){
-                  nums[val-1] = -nums[val-1];
-              }else if(nums[val-1]==0){
-                  nums[val-1]=-1*(len+1);
-            }
-        }
-        }
-        System.out.println(Arrays.toString(nums));
-        for(int i=1;i<=len;i++){
-            if(nums[i-1]>=0){
-                return i;
-            }
-
-        }
-
-        return len + 1;
-    }
-
-    public static void main(String[] args) {
-
-        int[] arr = new int[]{1,2,0};
-        int res = new lc_41().firstMissingPositive(arr);
-        System.out.println(res);
-    }
+	public static void main(String[] args) {
+		
+		int[] arr = new int[]{100000, 3, 4000, 2, 15, 1, 99999};
+		
+		lc_41 lc = new lc_41();
+		System.out.println("bruteForce");
+		int res = lc.firstMissingPositive_bruteForce(arr);
+		System.out.println(res);
+		System.out.println("Using Sort");
+		res = lc.firstMissingPositive_using_sort(arr);
+		System.out.println(res);
+		System.out.println("Using Set");
+		res = lc.firstMissingPositive_using_set(arr);
+		System.out.println(res);
+		System.out.println("Optimized");
+		int[] arr1 = new int[]{0};
+		res = lc.smallestMissing_optimized(arr1);
+		System.out.println(res);
+	}
+	
+	
+	public int firstMissingPositive_bruteForce(int[] arr) {
+		int len = arr.length;
+		
+		for (int i = 0; i < len; i++) {
+			int target = i + 1;
+			boolean found = false;
+			for (int k : arr) {
+				if (k > 0 && k == target) {
+					found = true;
+					break;
+				}
+			}
+			if (!found) {
+				return target;
+			}
+		}
+		return len + 1;
+	}
+	
+	//using Sort
+	public int firstMissingPositive_using_sort(int[] arr) {
+		Arrays.sort(arr);
+		int smallestMissing = 1;
+		for (int num : arr) {
+			if (num <= 0) continue;
+			if (num == smallestMissing) {
+				smallestMissing++;
+			} else if (num > smallestMissing) {
+				return smallestMissing;
+			}
+		}
+		
+		return smallestMissing;
+	}
+	
+	public int firstMissingPositive_using_set(int[] arr) {
+		Set<Integer> set = new HashSet<>();
+		int smallestMissing = 1;
+		for (int num : arr) {
+			if (num >= 0) {
+				set.add(num);
+			}
+		}
+		while (set.contains(smallestMissing)) {
+			smallestMissing++;
+		}
+		return smallestMissing;
+	}
+	
+	public int smallestMissing_optimized(int[] nums) {
+		int n = nums.length;
+		//100000, 3, 4000, 2, 15, 1, 99999
+		int len = nums.length;
+		
+		for (int i = 0; i < len; i++) {
+			while (nums[i] > 0 && nums[i] <= n && nums[nums[i] - 1] != nums[i]
+			) {
+				int correctIndex = nums[i] - 1;
+				
+				//swap the current with the correct index
+				int temp = nums[i];
+				nums[i] = nums[correctIndex];
+				nums[correctIndex] = temp;
+			}
+		}
+		for (int i = 0; i < n; i++) {
+			if (nums[i] != i + 1) {
+				return i + 1;
+			}
+		}
+		return n + 1;
+	}
 }
+	
+	
+
