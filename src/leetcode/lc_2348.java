@@ -17,13 +17,11 @@ public class lc_2348 {
 	public int[] calculatePowers(int n, int[][] queries, int[] powers, int k) {
 		int Mod = 1_000_000_007;
 		int[] res = new int[n];
-
-		
 		
 		for (int i = 0; i < n; i++) {
 			int start = queries[i][0];
 			int end = queries[i][1];
-			long ans=1;
+			long ans = 1;
 			for (int j = start; j <= end; j++) {
 				ans = (ans * powers[j]);
 			}
@@ -32,6 +30,7 @@ public class lc_2348 {
 		return res;
 		
 	}
+	
 	public int[] productQueries(int n, int[][] queries) {
 		int len = queries.length;
 		int[] powers = new int[32];
@@ -41,6 +40,18 @@ public class lc_2348 {
 			if ((n & (1 << i)) != 0) {
 				powers[k++] = 1 << i;
 			}
+		}
+		
+		int x = n;
+		int rep = 1;
+		while (x > 0) {
+			System.out.println(rep + "---");
+			if (x % 2 == 1) {
+				powers[k++] = x;
+			}
+			x = x / 2;
+			rep *= 2;
+			
 		}
 		
 		return calculatePowers(len, queries, powers, k);
