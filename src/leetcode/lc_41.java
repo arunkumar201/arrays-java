@@ -77,25 +77,20 @@ public class lc_41 {
 	
 	public int smallestMissing_optimized(int[] nums) {
 		int n = nums.length;
-		//100000, 3, 4000, 2, 15, 1, 99999
-		int len = nums.length;
+		int[] seen = new int[n + 1];
 		
-		for (int i = 0; i < len; i++) {
-			while (nums[i] > 0 && nums[i] <= n && nums[nums[i] - 1] != nums[i]
-			) {
-				int correctIndex = nums[i] - 1;
-				
-				//swap the current with the correct index
-				int temp = nums[i];
-				nums[i] = nums[correctIndex];
-				nums[correctIndex] = temp;
+		for (int currItem : nums) {
+			if (currItem > 0 && currItem <= n) {
+				seen[currItem] = 1;
 			}
 		}
-		for (int i = 0; i < n; i++) {
-			if (nums[i] != i + 1) {
-				return i + 1;
+		
+		for (int i = 1; i <= n; i++) {
+			if (seen[i] == 0) {
+				return i;
 			}
 		}
+		
 		return n + 1;
 	}
 }
