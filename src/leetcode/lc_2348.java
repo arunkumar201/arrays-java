@@ -1,59 +1,53 @@
 package leetcode;
 
-import java.util.Arrays;
-
 public class lc_2348 {
 	
 	public static void main(String[] args) {
-		//Input: n = 15, queries = [[0,1],[2,2],[0,3]]
 		
-		int n = 13;
-		int[][] queries = new int[][]{{1, 2}, {1, 1}};
+		//Input: nums = [1,3,0,0,2,0,0,4] -6
+//		Input: nums = [0,0,0,2,0,0] -9
+		
+		int[] nums = {0, 0, 0, 2, 0, 0};
 		lc_2348 lc = new lc_2348();
-		int[] res = lc.productQueries(n, queries);
-		System.out.println(Arrays.toString(res));
-	}
-	
-	public int[] calculatePowers(int n, int[][] queries, int[] powers, int k) {
-		int Mod = 1_000_000_007;
-		int[] res = new int[n];
-		
-		for (int i = 0; i < n; i++) {
-			int start = queries[i][0];
-			int end = queries[i][1];
-			long ans = 1;
-			for (int j = start; j <= end; j++) {
-				ans = (ans * powers[j]);
-			}
-			res[i] = (int) ans % Mod;
-		}
-		return res;
+		long res = lc.zeroFilledSubarray(nums);
+		System.out.println(res);
+		System.out.println("Optimized");
+		res = lc.zeroFilledSubarray_optimized(nums);
+		System.out.println(res);
 		
 	}
 	
-	public int[] productQueries(int n, int[][] queries) {
-		int len = queries.length;
-		int[] powers = new int[32];
+	public long zeroFilledSubarray(int[] nums) {
 		
-		int k = 0;
-		for (int i = 0; i < 32; i++) {
-			if ((n & (1 << i)) != 0) {
-				powers[k++] = 1 << i;
-			}
-		}
+		int len = nums.length;
+		long ans = 0;
 		
-		int x = n;
-		int rep = 1;
-		while (x > 0) {
-			System.out.println(rep + "---");
-			if (x % 2 == 1) {
-				powers[k++] = x;
-			}
-			x = x / 2;
-			rep *= 2;
+		int left = 0;
+		int right = 0;
+		while (right < len) {
+			int currentNum = nums[right];
 			
+			if (currentNum != 0) {
+				left = right + 1;
+			}
+			ans += (long) right - left + 1;
+			right++;
 		}
-		
-		return calculatePowers(len, queries, powers, k);
+		return ans;
 	}
+	
+	public long zeroFilledSubarray_optimized(int[] nums) {
+		long ans = 0;
+		int count = 0;
+		for (int num : nums) {
+			if (num == 0) {
+				count++;
+				ans += count;
+			} else {
+				count = 0;
+			}
+		}
+		return ans;
+	}
+	
 }
