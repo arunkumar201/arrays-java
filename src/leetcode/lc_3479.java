@@ -2,7 +2,6 @@ package leetcode;
 
 import java.util.HashMap;
 import java.util.HashSet;
-import java.util.Iterator;
 import java.util.Map;
 
 public class lc_3479 {
@@ -62,7 +61,6 @@ public class lc_3479 {
 			int fruitsToPlace = fruits[i];
 			
 			
-		
 		}
 		
 		return n - unplacedFruits;
