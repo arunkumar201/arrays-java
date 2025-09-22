@@ -26,4 +26,23 @@ public class lc_3005 {
 		return maxFrequencyElements;
 	}
 
+	public int maxFrequencyElements_onePass(int[] nums) {
+		int[] count = new int[101];
+		int maxFrequency = 0;
+		int maxFrequencyElements = 0;
+
+		for (int num : nums) {
+			count[num]++;
+			int freq = count[num];
+
+			if (freq > maxFrequency) {
+				//found the new maxFrequency 
+				maxFrequencyElements = freq;
+				maxFrequency = freq;
+			} else if (freq == maxFrequency) {
+				maxFrequencyElements += freq;
+			}
+		}
+		return maxFrequencyElements;
+	}
 }
