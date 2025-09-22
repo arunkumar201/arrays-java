@@ -10,5 +10,6 @@
 		"yeellow",
 		"yllw",
 		"yollow"
-	]
+	],
+	"java.debug.settings.onBuildFailureProceed": true
 }
