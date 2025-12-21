@@ -13,6 +13,9 @@ public class lc_15 {
 		System.out.println("Using Optimal way");
 		List<List<Integer>> result2 = lc.threeSum(nums);
 		System.out.println("--------" + result2);
+		System.out.println("Using HashSet");
+		List<List<Integer>> result3 = lc.threeSum_HashSet(nums);
+		System.out.println("--------" + result3);
 
 	}
 
@@ -74,4 +77,33 @@ public class lc_15 {
 		return result;
 	}
 
+	// using HashSet
+	public List<List<Integer>> threeSum_HashSet(int[] nums) {
+
+		int n = nums.length;
+		List<List<Integer>> result = new ArrayList<>();
+
+		HashSet<List<Integer>> set = new HashSet<>();
+
+		for (int i = 0; i < n; i++) {
+			HashSet<Integer> lookup = new HashSet<>();
+			for (int j = i + 1; j < n; j++) {
+				int third = -(nums[i] + nums[j]);
+				if (lookup.contains(third)) {
+					List<Integer> temp = new ArrayList<>();
+					temp.add(nums[i]);
+					temp.add(nums[j]);
+					temp.add(third);
+					// sort the
+					temp.sort((a, b) -> a - b);
+					set.add(temp);
+				}
+				lookup.add(nums[j]);
+			}
+		}
+		for (List<Integer> list : set) {
+			result.add(list);
+		}
+		return result;
+	}
 }
