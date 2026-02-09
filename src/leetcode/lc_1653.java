@@ -44,7 +44,7 @@ public class lc_1653 {
 		int res = n;
 		int[] a_count_left = new int[n];
 
-		a_count_left[n - 1] = s.charAt(n - 1) == 'a' ? 1 : 0;
+		a_count_left[n - 1] = 0;
 		for (int i = n - 2; i >= 0; i--) {
 			a_count_left[i] += a_count_left[i + 1];
 			if (s.charAt(i + 1) == 'a') {
