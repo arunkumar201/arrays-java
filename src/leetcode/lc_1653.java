@@ -36,11 +36,39 @@ public class lc_1653 {
 		}
 		return deletions;
 	}
-	
+
+	// using extra space with pre-processing
+
+	public int minDeletionsExtraSpace(String s) {
+		int n = s.length();
+		int res = n;
+		int[] a_count_left = new int[n];
+
+		a_count_left[n - 1] = s.charAt(n - 1) == 'a' ? 1 : 0;
+		for (int i = n - 2; i >= 0; i--) {
+			a_count_left[i] += a_count_left[i + 1];
+			if (s.charAt(i + 1) == 'a') {
+				a_count_left[i] += 1;
+			}
+		}
+
+		int b_count_right = 0;
+		for (int i = 0; i < n; i++) {
+			res = Math.min(res, a_count_left[i] + b_count_right);
+			if (s.charAt(i) == 'b') {
+				b_count_right++;
+			}
+		}
+
+		return res;
+	}
+
 	public static void main(String[] args) {
 		//Input: s = "aababbab"
 		String s = "aababbab";
 		int res = new lc_1653().minDeletionsOptimal(s);
 		System.out.println(res);
+		int res1 = new lc_1653().minDeletionsExtraSpace(s);
+		System.out.println("res with extra space " + res1);
 	}
 }
