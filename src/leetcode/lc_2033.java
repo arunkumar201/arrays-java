@@ -12,39 +12,70 @@ public class lc_2033 {
 		
 	}
 	
-	public int minOperations(int[][] grid, int x) {
-		int operations = 0;
+  public int minOperations(int[][] grid, int x) {
+        int rows = grid.length;
+        int cols = grid[0].length;
+
+        // Flatten grid into a 1D array
+        int[] flat = new int[rows * cols];
+        int index = 0;
+
+        for (int[] row : grid) {
+            for (int value : row) {
+                flat[index++] = value;
+            }
+        }
+
+        // Sort to find median
+        Arrays.sort(flat);
+        int median = flat[flat.length / 2];
+
+        int minOps = 0;
+
+        for (int value : flat) {
+            int diff = Math.abs(value - median);
+
+            // If not divisible by x , not possible to make equal 
+            if (diff % x != 0) {
+                return -1;
+            }
+
+            // Count operations needed
+            minOps += diff / x;
+        }
+
+        return minOps;
+    }
+
+	//we can use the quick sort to sort the half of the array and then find the median
+	//as we are interested in the median, we can sort the half of the array and then find the median
+	public int minOperations_quickSort(int[][] grid, int x) {
 		int rows = grid.length;
 		int cols = grid[0].length;
-		int[] list = new int[rows * cols];
-		
-		//make it flatted list
+
+		int[] flat = new int[rows * cols];
 		int index = 0;
-		for (int i = 0; i < rows; i++) {
-			for (int j = 0; j < cols; j++) {
-				list[index++] = grid[i][j];
+
+		for (int[] row : grid) {
+			for (int value : row) {
+				flat[index++] = value;
 			}
 		}
-//		sort the list
-		Arrays.sort(list);
-		
-		// get  median element
-		int n = list.length;
-		int median = list[n / 2];
-		System.out.println("median: " + median);
-		for (int i = 0; i < n; i++) {
-			int current = list[i];
-			
-			if (current == median) {
-				continue;
-			}
-			if (Math.abs(current - median) % x != 0) {
+
+		// MyQuickSort(flat, 0, flat.length - 1);
+		int median = flat[flat.length / 2];
+
+		int minOps = 0;
+
+		for (int value : flat) {
+			int diff = Math.abs(value - median);
+
+			if (diff % x != 0) {
 				return -1;
 			}
-			
-			operations += Math.abs(current - median) / x;
+
+			minOps += diff / x;
 		}
-		
-		return operations;
+		return minOps;
 	}
 }
