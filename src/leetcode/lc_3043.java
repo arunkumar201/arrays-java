@@ -37,4 +37,34 @@ public class lc_3043 {
 		System.out.println(res);
 		
 	}
+
+    public int longestCommonPrefix_(int[] arr1, int[] arr2) {
+        HashSet<Integer> set = new HashSet<>();
+
+        // maintain the all unique prefixes
+        for (int item : arr1) {
+            while (item != 0) {
+                set.add(item);
+                item = item / 10;
+            }
+        }
+        int res = 0;
+
+        // now iterate over the second arr
+        for (int item : arr2) {
+
+            while (item != 0) {
+
+                if (set.contains(item)) {
+                    int len = Integer.toString(item).length();
+                    res = Math.max(res, len);
+                }
+                item = item / 10;
+            }
+        }
+
+        return res;
+
+    }
+
 }
