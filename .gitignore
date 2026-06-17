@@ -9,3 +9,14 @@ out
 .kiro/steering/byterover-rules.md
 .qoder/rules/byterover-rules.md
 .augment/rules/byterover-rules.md
+.vscode
+*.class
+*.jar
+*.DS_Store
+*.log
+*.log.*
+*.log.*.*
+*.log.*.*.*
+*.log.*.*.*.*
+*.log.*.*.*.*.*
+
